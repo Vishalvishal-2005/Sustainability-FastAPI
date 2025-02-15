@@ -15,14 +15,17 @@ from xgboost import XGBRegressor  # ✅ XGBoost Import
 
 # FastAPI Initialization
 app = FastAPI()
+origins = [
+    "https://novapredicts.netlify.app",  # Your frontend URL
+    "http://localhost:3000",  # For local development
+]
 
-# Enable CORS for frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,  # ✅ Allows frontend to access backend
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # ✅ Allow all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # ✅ Allow all headers
 )
 
 # Database Configuration (Replace with your DB credentials)
