@@ -11,8 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application files
 COPY . .
 
-# Expose the port FastAPI runs on (Render dynamically assigns a port)
+# Expose the port (not necessary for Render, but good practice)
 EXPOSE 8000
 
-# Command to run the FastAPI app
-CMD ["uvicorn", "emission_model:app", "--host", "0.0.0.0", "--port", "${PORT:-8000}"]
+# Run the FastAPI app with a dynamic port
+CMD ["sh", "-c", "uvicorn emission_model:app --host 0.0.0.0 --port ${PORT:-8000}"]
