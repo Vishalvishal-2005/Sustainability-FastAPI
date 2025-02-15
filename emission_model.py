@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -222,7 +223,9 @@ async def get_plot():
         raise HTTPException(status_code=404, detail="Plot not found")
     return StreamingResponse(open(img_path, "rb"), media_type="image/png")
 
-@app.get("/")
+
+@app.get("/", response_class=HTMLResponse)
+@app.head("/")
 async def main_page():
     """ Returns an HTML form for file upload. """
     html_content = """
@@ -244,7 +247,10 @@ async def main_page():
     </html>
     """
     return HTMLResponse(content=html_content)
+
 if __name__ == "__main__":
     import os
+    import uvicorn
+
     PORT = int(os.getenv("PORT", 8000))  # Get the PORT from the environment (Render provides this dynamically)
     uvicorn.run(app, host="0.0.0.0", port=PORT)
