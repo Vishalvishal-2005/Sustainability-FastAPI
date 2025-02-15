@@ -10,3 +10,4 @@ xgboost
 mysql-connector-python  # Add this
 numpy
 psycopg2-binary
+python-multipart
