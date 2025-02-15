@@ -244,6 +244,7 @@ async def main_page():
     </html>
     """
     return HTMLResponse(content=html_content)
-
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+    PORT = int(os.getenv("PORT", 8000))  # Get the PORT from the environment (Render provides this dynamically)
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
